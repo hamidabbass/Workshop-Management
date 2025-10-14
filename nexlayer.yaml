@@ -1,0 +1,12 @@
+application:
+  name: "workshop-management"
+  pods:
+    - name: "frontend"
+      image: "registry.nexlayer.io/nexlayer-mcp/ac2b2fb10a0cf3682bce31f19f87895e/workshop-management-053ea1c6-frontend:70989aca-1760448968"
+      path: "/"
+      servicePorts:
+        - 3000
+      vars:
+        NODE_ENV: "production"
+        PORT: "3000"
+        NEXT_PUBLIC_SITE_URL: "<% URL %>"
