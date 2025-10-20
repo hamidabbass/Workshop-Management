@@ -7,5 +7,3 @@ README.md
 .git
 .vscode
 *.md
-.env.local
-.env*.local
