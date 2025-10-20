@@ -1,0 +1,44 @@
+application:
+  name: workshop-management
+  pods:
+    - name: frontend
+      image: registry.nexlayer.io/nexlayer-mcp/ac2b2fb10a0cf3682bce31f19f87895e/workshop-management-e980563b-frontend:5c76fb3b-1760986741
+      path: /
+      servicePorts:
+        - 3000
+      vars:
+        NODE_ENV: production
+        NEXT_PUBLIC_FIREBASE_API_KEY: AIzaSyDUB1f5_oplWDbKcvpWzMR08vF7ZAnlfbc
+        NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: workshop-management-9ce72.firebaseapp.com
+        NEXT_PUBLIC_FIREBASE_PROJECT_ID: workshop-management-9ce72
+        NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: workshop-management-9ce72.appspot.com
+        NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: "216098985932"
+        NEXT_PUBLIC_FIREBASE_APP_ID: 1:216098985932:web:000b401dfa2860f7d02f69
+        NEXT_PUBLIC_API_URL: <% URL %>/api
+
+    - name: backend
+      image: registry.nexlayer.io/nexlayer-mcp/ac2b2fb10a0cf3682bce31f19f87895e/workshop-management-e980563b-backend:2fbab8e2-1760986200
+      path: /api
+      servicePorts:
+        - 3003
+      vars:
+        NODE_ENV: production
+        DB_HOST: database.pod
+        DB_USER: workshopuser
+        DB_PASSWORD: workshoppass123
+        DB_NAME: WorkshopManagement
+        DB_PORT: "3306"
+
+    - name: database
+      image: registry.nexlayer.io/nexlayer-mcp/ac2b2fb10a0cf3682bce31f19f87895e/workshop-management-e980563b-database:2fbab8e2-1760986200
+      servicePorts:
+        - 3306
+      vars:
+        MYSQL_ROOT_PASSWORD: rootpassword
+        MYSQL_DATABASE: WorkshopManagement
+        MYSQL_USER: workshopuser
+        MYSQL_PASSWORD: workshoppass123
+      volumes:
+        - name: mysql-data
+          size: 2Gi
+          mountPath: /var/lib/mysql
