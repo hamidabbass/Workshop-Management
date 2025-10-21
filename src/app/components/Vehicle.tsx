@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '@/config/api';
 
 const CompanyContent: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +23,7 @@ const CompanyContent: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3003/api/vehicles', formData);
+      await axios.post(`${API_BASE_URL}/api/vehicles`, formData);
       setSuccessMessage('Vehicle added successfully');
       setFormData({
         registrationNo: '',

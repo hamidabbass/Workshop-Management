@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '@/config/api';
 
 const AccountContent: React.FC = () => {
   const [customersWithWorkOrders, setCustomersWithWorkOrders] = useState([]);
@@ -10,7 +11,7 @@ const AccountContent: React.FC = () => {
 
   const fetchCustomersWithWorkOrders = async () => {
     try {
-      const response = await axios.get('http://localhost:3003/api/customers-with-workorders');
+      const response = await axios.get(`${API_BASE_URL}/api/customers-with-workorders`);
       setCustomersWithWorkOrders(response.data);
     } catch (error) {
       console.error('Error fetching customers with work orders', error);

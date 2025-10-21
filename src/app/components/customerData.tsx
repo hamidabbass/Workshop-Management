@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
+import { API_BASE_URL } from '@/config/api';
 
 const DevicesContent: React.FC = () => {
   const [customers, setCustomers] = useState([]);
@@ -14,7 +15,7 @@ const DevicesContent: React.FC = () => {
 
   const fetchCustomers = async () => {
     try {
-      const response = await axios.get('http://localhost:3003/api/customers');
+      const response = await axios.get(`${API_BASE_URL}/api/customers`);
       setCustomers(response.data);
     } catch (error) {
       console.error('Error fetching customers', error);
@@ -29,7 +30,7 @@ const DevicesContent: React.FC = () => {
 
   const handleDelete = async (customer_id: any) => {
     try {
-      await axios.delete(`http://localhost:3003/api/customers/${customer_id}`);
+      await axios.delete(`${API_BASE_URL}/api/customers/${customer_id}`);
       fetchCustomers();
     } catch (error) {
       console.error('Error deleting customer', error);
@@ -46,7 +47,7 @@ const DevicesContent: React.FC = () => {
 
   const handleUpdate = async () => {
     try {
-      await axios.put(`http://localhost:3003/api/customers/${editingCustomer}`, formData);
+      await axios.put(`${API_BASE_URL}/api/customers/${editingCustomer}`, formData);
       setEditingCustomer(null);
       setIsModalOpen(false);
       fetchCustomers();

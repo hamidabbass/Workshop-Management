@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '@/config/api';
 
 const OrdersContent: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -21,7 +22,7 @@ const OrdersContent: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3003/api/customers', formData);
+      await axios.post(`${API_BASE_URL}/api/customers`, formData);
       setSuccessMessage('Data added successfully');
       setFormData({
         firstName: '',

@@ -5,6 +5,7 @@ import { auth } from "@/app/firebase/config";
 import axios from 'axios';
 import BarChart from "./charts/barchart";
 import PieChart from "./charts/piechart";
+import { API_BASE_URL } from '@/config/api';
 
 const DashboardContent: React.FC = () => {
   const [customersCount, setCustomersCount] = useState(0);
@@ -15,9 +16,9 @@ const DashboardContent: React.FC = () => {
     const fetchData = async () => {
       try {
         const [customersResponse, workOrdersResponse, vehiclesResponse] = await Promise.all([
-          axios.get('http://localhost:3003/api/customers'),
-          axios.get('http://localhost:3003/api/customers-with-workorders'),
-          axios.get('http://localhost:3003/api/vehicles') // Fetch vehicle data
+          axios.get(`${API_BASE_URL}/api/customers`),
+          axios.get(`${API_BASE_URL}/api/customers-with-workorders`),
+          axios.get(`${API_BASE_URL}/api/vehicles`) // Fetch vehicle data
         ]);
 
         setCustomersCount(customersResponse.data.length);

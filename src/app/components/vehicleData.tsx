@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
+import { API_BASE_URL } from '@/config/api';
 
 const SettingsContent: React.FC = () => {
   const [customers, setCustomers] = useState([]);
@@ -16,7 +17,7 @@ const SettingsContent: React.FC = () => {
 
   const fetchCustomers = async () => {
     try {
-      const response = await axios.get('http://localhost:3003/api/customers');
+      const response = await axios.get(`${API_BASE_URL}/api/customers`);
       setCustomers(response.data);
     } catch (error) {
       console.error('Error fetching customers', error);
@@ -25,7 +26,7 @@ const SettingsContent: React.FC = () => {
 
   const fetchVehicles = async () => {
     try {
-      const response = await axios.get('http://localhost:3003/api/vehicles');
+      const response = await axios.get(`${API_BASE_URL}/api/vehicles`);
       setVehicles(response.data);
     } catch (error) {
       console.error('Error fetching vehicles', error);
@@ -48,7 +49,7 @@ const SettingsContent: React.FC = () => {
 
   const handleDelete = async (vehicle_id: any) => {
     try {
-      await axios.delete(`http://localhost:3003/api/vehicles/${vehicle_id}`);
+      await axios.delete(`${API_BASE_URL}/api/vehicles/${vehicle_id}`);
       fetchVehicles();
     } catch (error) {
       console.error('Error deleting vehicle', error);
@@ -65,7 +66,7 @@ const SettingsContent: React.FC = () => {
 
   const handleUpdate = async () => {
     try {
-      await axios.put(`http://localhost:3003/api/vehicles/${editingVehicle}`, formData);
+      await axios.put(`${API_BASE_URL}/api/vehicles/${editingVehicle}`, formData);
       setEditingVehicle(null);
       setIsModalOpen(false);
       fetchVehicles();
